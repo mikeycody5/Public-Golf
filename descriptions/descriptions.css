@@ -1,0 +1,339 @@
+:root {
+    --main-bg: #111;
+    --text-color: #eee;
+}
+
+body, html {
+    font-family: Arial, sans-serif;
+    background: rgb(0, 0, 0);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    background: rgb(4, 44, 1);
+    padding: 0px 7px;
+}
+
+.mobile-nav {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.mobile-nav ul {
+    display: flex;
+    padding: 5px;
+}
+
+.icon-container {
+    display: none;
+}
+
+
+.mobile-nav ul li {
+    list-style: none;
+    padding: 5px;
+    margin: 5px 20px;
+    justify-content: center;
+}
+
+.mobile-nav ul li a {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 5px;
+    color: #fff; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav ul li a:hover {
+    color: rgb(3, 77, 22); 
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    font-weight: 600;
+}
+
+.mobile-nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.public-golf {
+    margin: 0px 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.ranking-list {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    list-style: none;
+    padding: 40px;
+}
+
+.article-card {
+    background-color: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.article-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border: 20px black;
+    border-radius: 8px 8px 0 0;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    z-index: 2;
+}
+
+.overlay-text .course-rank {
+    font-size: 7rem;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.content-container {
+    padding: 20px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.details {
+    background-color: #222;
+    color: #a09c9c;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 0 0 8px 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.details p {
+    margin-bottom: 15px;
+}
+
+.details strong {
+    color: #fff;
+}
+
+.details .experience,
+.details .condition,
+.details .price {
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
+
+.details .experience {
+    border-color: #3F8F42; /* Green color for experience */
+}
+
+.details .condition {
+    border-color: #e91d1d; /* Yellow color for condition */
+}
+
+.details .price {
+    border-color: rgb(196, 182, 157); /* Red color for price */
+}
+
+
+footer {
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+footer {
+    background: linear-gradient(180deg, black 0%, rgb(31, 31, 31) 100%);
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 40px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center; 
+    margin-top: auto;
+}
+
+.footer-section {
+    margin-bottom: 10px;
+}
+
+
+.footer-section p{
+    font-family: 'Playfair Display', serif;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding-left: 10px;
+    display: flex; 
+}
+
+.footer-section ul li {
+    margin-right: 20px;
+}
+
+.footer-section a {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: rgb(134, 138, 135);
+}
+
+.social-icons-container {
+    justify-content: center;
+    display: flex;
+}
+
+.social-icon {
+    margin-right: 20px;
+    color: #fff;
+    font-size: 20px;
+}
+
+/* ... existing styles ... */
+
+@media (max-width: 768px) {
+
+    .public-golf {
+        font-size: 35px;
+        font-weight: bold;
+        text-align: center; 
+        margin-top: 5px;
+        padding: 20px;
+    }
+
+    .mobile-nav {
+        flex-direction: column;
+    }
+
+    .icon-container {
+        display: block;
+    }
+
+    .menu-container {
+        position: relative;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        padding: 4px;
+        margin: 0;
+        display: none;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .mobile-nav ul.show {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-nav ul li {
+        margin: 5px 0;
+    }
+
+    .mobile-nav ul li a {
+        padding: 5px;
+        color: #fff; 
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .mobile-nav ul li a:hover {
+        color: rgb(3, 77, 22); 
+        background-color: #fff;
+        border-radius: 3px;
+        padding: 5px;
+        font-weight: 600;
+    }
+
+    .icon-container {
+        position: absolute;
+        right: 13px;
+        top: 13px;
+        cursor: pointer;
+    }
+
+    #pancake-icon {
+        display: block;
+    }
+
+    #close-icon {
+        display: none;
+    }
+
+    .ranking-list {
+        gap: 50px;
+        padding: 60px;
+    }
+    
+    footer {
+        text-align: left;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .social-icons-container {
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+}

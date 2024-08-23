@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Ten Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; 
+            color: white; 
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: rgb(4, 44, 1);
+            padding: 0px 7px;
+        }
+        
+        .mobile-nav {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            padding: 5px;
+        }
+
+        .icon-container {
+            display: none;
+        }
+
+
+        .mobile-nav ul li {
+            list-style: none;
+            padding: 5px;
+            margin: 5px 20px;
+            justify-content: center;
+        }
+
+        .mobile-nav ul li a {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 17px;
+            padding: 5px;
+            color: #fff; 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: rgb(4, 44, 1); 
+            background-color: #fff;
+            border-radius: 3px;
+            padding: 5px;
+            font-weight: 600;
+        }
+
+        .mobile-nav {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .public-golf {
+            margin: 0px 15px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #map {
+            height: 500px;
+            border: 10px solid rgb(54, 54, 54);
+            margin: 0 30px; 
+            border-radius: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .custom-marker {
+            background-color: rgb(4, 44, 1);
+            color: white;
+            font-size: 22px;
+            text-align: center;
+            border-radius: 50%;
+            font-family: 'Playfair Display', serif; 
+        }
+
+
+        footer {
+            background: linear-gradient(180deg, var(--main-bg) 0%, rgb(31, 31, 31) 100%);
+            color: #fff;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 40px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center; 
+            margin-top: auto;
+        }
+
+        .footer-section {
+            margin-bottom: 10px;
+        }
+
+
+        .footer-section p{
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding-left: 10px;
+            display: flex; 
+        }
+
+        .footer-section ul li {
+            margin-right: 20px;
+        }
+
+        .footer-section a {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: rgb(134, 138, 135);
+        }
+
+        .social-icons-container {
+            justify-content: center;
+            display: flex;
+        }
+
+        .social-icon {
+            margin-right: 20px;
+            color: #fff;
+            font-size: 20px;
+        }
+
+
+    @media (max-width: 768px) {
+        footer {
+            text-align: left;
+        }
+
+        .footer-container {
+            flex-direction: column;
+        }
+
+        .social-icons-container {
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .public-golf {
+            font-size: 35px;
+            font-weight: bold;
+            text-align: center; 
+            margin-top: 5px;
+            padding: 20px;
+        }
+
+        .mobile-nav {
+            flex-direction: column;
+        }
+
+        .icon-container {
+            display: block;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 4px;
+            margin: 0;
+            display: none;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .mobile-nav ul.show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav ul li {
+            margin: 5px 0;
+        }
+
+        .mobile-nav ul li a {
+            padding: 5px;
+            color: #fff; 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: rgb(4, 44, 1); 
+            background-color: #fff;
+            border-radius: 3px;
+            padding: 5px;
+            font-weight: 600;
+        }
+
+        .icon-container {
+            position: absolute;
+            right: 13px;
+            top: 13px;
+            cursor: pointer;
+        }
+
+        #pancake-icon {
+            display: block;
+        }
+
+        #close-icon {
+            display: none;
+        }
+    }
+    </style>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+<header>
+    <nav class="mobile-nav">
+        <div class="menu-container">
+            <div class="icon-container">
+                <img src="../images/pancake-menu.svg" alt="Menu" id="pancake-icon">
+                <img src="../images/x-menu.svg" alt="Close" id="close-icon">
+            </div>
+            <ul>
+                <li><a href="../descriptions/descriptions.html">DESCRIPTIONS</a></li>
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="#">JOBS</a></li>
+                <li><a href="#">BLOG</a></li>
+                <li><a href="#">NEWS</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <li><a href="#">ABOUT</a></li>     
+            </ul>
+            <div class="public-golf">PublicGolf</div>
+        </div>
+    </nav>
+</header>
+<div><h1>Top Ten Map</h1> </div> 
+<div id="map"></div>
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <a href="#" class="social-icon"><i class="fa fa-envelope"></i></a>
+            <a href="#" class="social-icon"><i class="fa fa-phone"></i></a>
+            <a href="#" class="social-icon"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fa fa-instagram"></i></a>
+        </div>
+        <div class="footer-section">
+            <ul>
+                <li><a href="descriptions/descriptions.html">Descriptions</a></li>
+                <li><a href="map/map.html">Map</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <p>&#169;2023 PublicGolf</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    var golfCourses = [
+        { name: 'Granite Links', rank: 1, lat: 42.24023, lon: -71.04611 },
+        { name: 'Crumpin Fox Club', rank: 2, lat: 42.6757, lon: -72.52442 },
+        { name: 'Red Tail Golf Club', rank: 3, lat: 42.53389, lon: -71.60125 },
+        { name: 'Pinehills Golf Club', rank: 4, lat: 41.88753, lon: -70.60098 },
+        { name: 'Waverly Oaks Golf Club', rank: 5, lat: 41.88986, lon: -70.61838 },
+        { name: 'The Ranch Golf Club', rank: 6, lat: 42.08479, lon: -72.77627 },
+        { name: 'The Cape Club', rank: 7, lat: 41.63369, lon: -70.59964 },
+        { name: 'Taconic Golf Club', rank: 8, lat: 42.70317, lon: -73.20696 },
+        { name: 'Newton Commonwealth Golf Course', rank: 9, lat: 42.34425, lon: -71.17168 },
+        { name: 'Acushnet River Valley Golf Course', rank: 10, lat: 41.71564, lon: -70.89571 }
+    ];
+
+    var map = L.map('map').setView([42.3435, -71.938155], 7); 
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    for (var i = 0; i < golfCourses.length; i++) {
+        var golfCourse = golfCourses[i];
+        var marker = L.marker([golfCourse.lat, golfCourse.lon], {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                iconSize: [30, 40], 
+                html: `<div>${golfCourse.rank}</div>`
+            })
+        }).bindPopup(`<b>${golfCourse.name}</b><br>Rank: ${golfCourse.rank}`)
+        .addTo(map);
+    }
+
+    function toggleMenu() {
+        var menu = document.querySelector('.mobile-nav ul');
+        menu.classList.toggle('show');
+
+        var pancakeIcon = document.getElementById('pancake-icon');
+        var closeIcon = document.getElementById('close-icon');
+
+        pancakeIcon.style.display = menu.classList.contains('show') ? 'none' : 'block';
+        closeIcon.style.display = menu.classList.contains('show') ? 'block' : 'none';
+    }
+
+    document.getElementById('pancake-icon').addEventListener('click', toggleMenu);
+    document.getElementById('close-icon').addEventListener('click', toggleMenu);
+</script>
+</body>
+</html>
+
